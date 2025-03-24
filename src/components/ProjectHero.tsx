@@ -1,4 +1,3 @@
-
 import { cn } from '@/lib/utils';
 
 interface ProjectHeroProps {
@@ -21,8 +20,8 @@ const ProjectHero = ({
   heroImage
 }: ProjectHeroProps) => {
   return (
-    <section className="pt-32 pb-16 animate-fade-in">
-      <div className="container-tight">
+    <section className="animate-fade-in">
+      <div className="container-tight pt-32 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
           <div className="lg:col-span-8 space-y-8">
             <div className="space-y-2">
@@ -66,14 +65,12 @@ const ProjectHero = ({
         </div>
       </div>
       
-      <div className="mt-16">
-        <div className="w-full aspect-[16/9] bg-lightGray overflow-hidden">
-          <img 
-            src={heroImage} 
-            alt={title} 
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="w-full aspect-[16/9] bg-lightGray overflow-hidden">
+        <img 
+          src={heroImage} 
+          alt={title} 
+          className="w-full h-full object-cover"
+        />
       </div>
     </section>
   );

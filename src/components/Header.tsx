@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -66,6 +65,15 @@ const Header = () => {
     { name: "About", path: "/about" },
   ];
 
+  const scrollToProjects = () => {
+    if (location.pathname === '/') {
+      const projectsSection = document.getElementById('projects-section');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -95,6 +103,7 @@ const Header = () => {
               <Link
                 key={link.name}
                 to={link.path}
+                onClick={link.name === "Projects" ? scrollToProjects : undefined}
                 className={cn(
                   "text-sm font-medium hover-link focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md px-2 py-1",
                   location.pathname === link.path
@@ -182,6 +191,7 @@ const Header = () => {
             <Link
               key={link.name}
               to={link.path}
+              onClick={link.name === "Projects" ? scrollToProjects : undefined}
               className={cn(
                 "text-xl font-medium animate-fade-up focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md px-3 py-2",
                 location.pathname === link.path

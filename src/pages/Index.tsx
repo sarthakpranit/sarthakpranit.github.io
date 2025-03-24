@@ -1,53 +1,13 @@
-
 import { useState, useEffect } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-
-// Project data updated to reflect CV work
-const projectsData = [
-  {
-    id: "ai-personalization",
-    title: "AI-Driven Personalization Platform",
-    description: "Led UX strategy for a platform serving 94 teams, enabling predictive & generative AI capabilities that drove €200M+ revenue.",
-    thumbnail: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    categories: ["AI/ML Design", "UX Strategy"],
-    featured: true
-  },
-  {
-    id: "home-screen",
-    title: "Home Screen Orchestration",
-    description: "Led cross-functional UX for 9M daily users, balancing user needs with 54+ teams' business goals.",
-    thumbnail: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    categories: ["UX Design", "Personalization"],
-    featured: true
-  },
-  {
-    id: "checkout",
-    title: "Checkout Optimization",
-    description: "Spearheaded app-first checkout redesign, integrating Apple Pay and alternative payments, boosting conversion from 59% to 83%.",
-    thumbnail: "https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    categories: ["UX Design", "Payment Systems"]
-  },
-  {
-    id: "recommendations",
-    title: "Recommendation System Framework",
-    description: "Designed ML frameworks for product recommendations impacting 100+ teams.",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    categories: ["ML Design", "Recommendation Systems"]
-  },
-  {
-    id: "design-system",
-    title: "App UX Standards & Design System",
-    description: "Co-led App UX Standards, ensuring consistency across 200+ designers.",
-    thumbnail: "https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    categories: ["Design Systems", "Team Leadership"]
-  }
-];
+import { loadProjects } from "@/lib/content";
 
 const Index = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +22,14 @@ const Index = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const projectsData = await loadProjects();
+      setProjects(projectsData);
+    };
+    fetchProjects();
   }, []);
 
   const scrollToProjects = () => {
@@ -135,7 +103,7 @@ const Index = () => {
           </div>
 
           <div className="space-y-12">
-            {projectsData.map((project) => (
+            {projects.map((project) => (
               <ProjectCard
                 key={project.id}
                 id={project.id}

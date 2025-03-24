@@ -1,81 +1,110 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Project } from "../types/content";
+import { projectContent } from "../lib/content";
 
-// Get the project data type from an existing file
-type ProjectData = {
-  title: string;
-  description: string;
-  date: string;
-  client: string;
-  role: string;
-  categories: string[];
-  heroImage: string;
-  content: string;
-};
+interface ProjectNavigation {
+  nextProjectId: string | null;
+  previousProjectId: string | null;
+  nextProjectTitle: string;
+  previousProjectTitle: string;
+}
 
-export function useProject(projectsData: Record<string, ProjectData>) {
+interface UseProjectResult {
+  project: Project | null;
+  allProjects: Project[];
+  loading: boolean;
+  error: string | null;
+  navigation: ProjectNavigation;
+  navigateToProject: (id: string) => void;
+}
+
+// Define the project order using the project IDs from the content files
+const PROJECT_ORDER = [
+  'ai-personalization',
+  'home-screen',
+  'checkout',
+  'recommendations',
+  'design-system'
+] as const;
+
+export function useProject(): UseProjectResult {
   const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<ProjectData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  
-  // Create an array of project IDs for navigation
-  const projectIds = Object.keys(projectsData);
+  const [project, setProject] = useState<Project | null>(null);
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const getCurrentIndex = useCallback(() => {
+    if (!id) return -1;
+    return PROJECT_ORDER.indexOf(id as typeof PROJECT_ORDER[number]);
+  }, [id]);
+
+  const getNavigation = useCallback((): ProjectNavigation => {
+    const currentIndex = getCurrentIndex();
+    const nextProjectId = currentIndex < PROJECT_ORDER.length - 1 ? PROJECT_ORDER[currentIndex + 1] : null;
+    const previousProjectId = currentIndex > 0 ? PROJECT_ORDER[currentIndex - 1] : null;
+
+    return {
+      nextProjectId,
+      previousProjectId,
+      nextProjectTitle: nextProjectId ? 'Next Project' : '',
+      previousProjectTitle: previousProjectId ? 'Previous Project' : ''
+    };
+  }, [getCurrentIndex]);
+
+  const navigateToProject = useCallback((projectId: string) => {
+    navigate(`/projects/${projectId}`);
+  }, [navigate]);
 
   useEffect(() => {
-    // In a real app, this would fetch data from an API
-    if (id && projectsData[id]) {
-      setProject(projectsData[id]);
-    }
-    setIsLoading(false);
-  }, [id, projectsData]);
+    let isMounted = true;
 
-  const handleNavigation = (direction: 'next' | 'prev') => {
-    if (!id) return;
-    
-    const currentIndex = projectIds.indexOf(id);
-    if (currentIndex === -1) return;
-    
-    let newIndex;
-    if (direction === 'next') {
-      newIndex = (currentIndex + 1) % projectIds.length;
-    } else {
-      newIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
-    }
-    
-    navigate(`/project/${projectIds[newIndex]}`);
-  };
+    async function fetchData() {
+      if (!id) return;
+      
+      try {
+        setLoading(true);
+        setError(null);
 
-  // Get next and previous project details for buttons
-  const getAdjacentProject = (direction: 'next' | 'prev') => {
-    if (!id) return null;
-    
-    const currentIndex = projectIds.indexOf(id);
-    if (currentIndex === -1) return null;
-    
-    let adjacentIndex;
-    if (direction === 'next') {
-      adjacentIndex = (currentIndex + 1) % projectIds.length;
-    } else {
-      adjacentIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
+        const [projectData, projectsData] = await Promise.all([
+          projectContent.loadById(id),
+          projectContent.loadAll()
+        ]);
+        
+        if (!isMounted) return;
+
+        if (!projectData) {
+          setError('Project not found');
+          return;
+        }
+        
+        setProject(projectData);
+        setAllProjects(projectsData);
+      } catch (err) {
+        if (!isMounted) return;
+        setError(err instanceof Error ? err.message : 'Failed to load project');
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
     }
-    
-    const adjacentId = projectIds[adjacentIndex];
-    return {
-      id: adjacentId,
-      title: projectsData[adjacentId]?.title || 'Project'
+
+    fetchData();
+
+    return () => {
+      isMounted = false;
     };
-  };
-
-  const prevProject = getAdjacentProject('prev');
-  const nextProject = getAdjacentProject('next');
+  }, [id]);
 
   return {
     project,
-    isLoading,
-    handleNavigation,
-    prevProject,
-    nextProject
+    allProjects,
+    loading,
+    error,
+    navigation: getNavigation(),
+    navigateToProject
   };
 }
