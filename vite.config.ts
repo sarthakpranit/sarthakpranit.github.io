@@ -17,11 +17,22 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    }
   },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020'
+    }
+  },
+  esbuild: {
+    target: 'es2020'
+  }
 }))
