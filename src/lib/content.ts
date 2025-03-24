@@ -55,12 +55,35 @@ export const projectContent = {
       return [];
     }
   },
-  loadById: (id: string) => {
-    return loadContent<Project>(`../content/projects/${id}.ts`);
+  loadById: async (id: string) => {
+    const cacheKey = `project/${id}`;
+    if (contentCache.has(cacheKey)) {
+      return contentCache.get(cacheKey);
+    }
+
+    try {
+      // Use static glob pattern for the specific file
+      const files = import.meta.glob('../content/projects/*.ts', { eager: true });
+      const filePath = Object.keys(files).find(path => path.includes(id));
+      
+      if (!filePath) {
+        return null;
+      }
+
+      const content = files[filePath];
+      if (content && typeof content === 'object' && 'default' in content) {
+        contentCache.set(cacheKey, content.default);
+        return content.default as Project;
+      }
+      return null;
+    } catch (error) {
+      console.error(`Error loading project ${id}:`, error);
+      return null;
+    }
   },
   clearCache: () => {
     for (const key of contentCache.keys()) {
-      if (key.startsWith('../content/projects/') || key === 'projects') {
+      if (key.startsWith('project/') || key === 'projects') {
         contentCache.delete(key);
       }
     }
@@ -98,12 +121,35 @@ export const blogContent = {
       return [];
     }
   },
-  loadById: (id: string) => {
-    return loadContent<BlogPost>(`../content/blog/${id}.ts`);
+  loadById: async (id: string) => {
+    const cacheKey = `blog/${id}`;
+    if (contentCache.has(cacheKey)) {
+      return contentCache.get(cacheKey);
+    }
+
+    try {
+      // Use static glob pattern for the specific file
+      const files = import.meta.glob('../content/blog/*.ts', { eager: true });
+      const filePath = Object.keys(files).find(path => path.includes(id));
+      
+      if (!filePath) {
+        return null;
+      }
+
+      const content = files[filePath];
+      if (content && typeof content === 'object' && 'default' in content) {
+        contentCache.set(cacheKey, content.default);
+        return content.default as BlogPost;
+      }
+      return null;
+    } catch (error) {
+      console.error(`Error loading blog post ${id}:`, error);
+      return null;
+    }
   },
   clearCache: () => {
     for (const key of contentCache.keys()) {
-      if (key.startsWith('../content/blog/') || key === 'blog') {
+      if (key.startsWith('blog/') || key === 'blog') {
         contentCache.delete(key);
       }
     }
