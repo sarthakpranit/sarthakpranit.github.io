@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme } from "../hooks/use-theme";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -128,37 +128,42 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-white dark:bg-dark pt-24 px-6 animate-fade-in">
-          <nav className="flex flex-col space-y-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={cn(
-                  "text-xl font-medium animate-fade-up",
-                  location.pathname === link.path
-                    ? "text-primary font-medium"
-                    : "text-dark dark:text-white"
-                )}
-                style={{ animationDelay: `${navLinks.indexOf(link) * 0.1}s` }}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          
-          {/* Close Button - Bottom Right */}
-          <button 
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed bottom-8 right-8 p-3 bg-lightGray dark:bg-gray-800 rounded-full shadow-lg text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors z-50"
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-        </div>
-      )}
+      {/* Mobile Navigation Menu - Improved positioning */}
+      <div 
+        className={cn(
+          "md:hidden fixed inset-0 z-40 bg-white dark:bg-dark pt-24 px-6 transition-all duration-300 ease-in-out",
+          isMobileMenuOpen 
+            ? "opacity-100 translate-y-0" 
+            : "opacity-0 -translate-y-full pointer-events-none"
+        )}
+      >
+        {/* Close Button - Top Right */}
+        <button 
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute top-6 right-6 p-2 rounded-full bg-lightGray dark:bg-gray-800 text-dark dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          aria-label="Close menu"
+        >
+          <X size={24} />
+        </button>
+
+        <nav className="flex flex-col space-y-8">
+          {navLinks.map((link, index) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className={cn(
+                "text-xl font-medium animate-fade-up",
+                location.pathname === link.path
+                  ? "text-primary font-medium"
+                  : "text-dark dark:text-white"
+              )}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 };
