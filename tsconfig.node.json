@@ -4,8 +4,7 @@
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "outDir": "./dist-node"  // Add this to specify output directory
+    "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts"]
 }
