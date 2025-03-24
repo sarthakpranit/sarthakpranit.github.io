@@ -21,11 +21,11 @@ interface UseProjectResult {
 
 // Define the project order using the project IDs from the content files
 const PROJECT_ORDER = [
-  'ai-personalization',
-  'home-screen',
+  'ai_personalization',
+  'home_screen',
   'checkout',
   'recommendations',
-  'design-system'
+  'design_system'
 ] as const;
 
 export function useProject(): UseProjectResult {

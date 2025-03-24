@@ -56,7 +56,7 @@ export const projectContent = {
     }
   },
   loadById: (id: string) => {
-    return loadContent<Project>(`../content/projects/${id.replace(/-/g, '_')}.ts`);
+    return loadContent<Project>(`../content/projects/${id}.ts`);
   },
   clearCache: () => {
     for (const key of contentCache.keys()) {
