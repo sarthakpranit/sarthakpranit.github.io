@@ -64,6 +64,13 @@ const Index = () => {
     };
   }, []);
 
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects-section');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with center alignment */}
@@ -93,7 +100,10 @@ const Index = () => {
           </p>
 
           <div className="flex gap-4 mt-6 justify-center">
-            <Button className="bg-primary hover:bg-primary-hover text-white">
+            <Button 
+              className="bg-primary hover:bg-primary-hover text-white"
+              onClick={scrollToProjects}
+            >
               View Projects
             </Button>
             <Button variant="outline" className="border-dark/20 hover:bg-lightGray dark:border-gray-700 dark:hover:bg-gray-700 dark:text-white">
@@ -106,12 +116,7 @@ const Index = () => {
           <Button 
             variant="ghost" 
             size="icon"
-            onClick={() => {
-              window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-              });
-            }}
+            onClick={scrollToProjects}
             className="animate-bounce dark:text-white"
           >
             <ArrowDown size={24} />
@@ -120,7 +125,7 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 px-6">
+      <section id="projects-section" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-4 dark:text-white">Selected Projects</h2>
