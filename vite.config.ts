@@ -28,24 +28,9 @@ export default defineConfig(({ mode }) => ({
     }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
-    esbuildOptions: {
-      target: 'es2020',
-      tsconfigRaw: {
-        compilerOptions: {
-          useDefineForClassFields: true,
-          target: 'es2020',
-          module: 'es2020',
-        }
-      }
-    }
+    include: ['react', 'react-dom']
   },
   esbuild: {
-    target: 'es2020',
-    tsconfigRaw: {
-      compilerOptions: {
-        useDefineForClassFields: true
-      }
-    }
+    target: 'es2020'
   }
 }))
