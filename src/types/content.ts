@@ -15,6 +15,7 @@ export interface Project extends BaseContent {
   heroImage: string;
   thumbnail: string;
   content: string;
+  featured?: boolean;
   technologies?: string[];
   links?: {
     github?: string;
