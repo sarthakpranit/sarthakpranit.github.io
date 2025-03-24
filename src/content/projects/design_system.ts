@@ -5,6 +5,7 @@ const project: Project = {
   title: "App UX Standards & Design System",
   description: "Co-led App UX Standards, ensuring consistency across 200+ designers.",
   date: "2016-2017",
+  slug: "design_system",
   client: "Booking.com",
   role: "Senior Product Designer",
   categories: ["Design Systems", "Team Leadership"],
