@@ -39,7 +39,8 @@ export default defineConfig(({ mode }) => ({
     target: 'es2020'
   },
   define: {
-    // Define the WebSocket token to prevent the reference error
-    __WS_TOKEN__: JSON.stringify('lovable-ws-token')
+    // Define the WebSocket token in a way that works for both development and production
+    '__WS_TOKEN__': '"lovable-ws-token"',
+    'process.env.__WS_TOKEN__': '"lovable-ws-token"'
   }
 }))
