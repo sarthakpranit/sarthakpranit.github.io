@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ProjectHero from "@/components/ProjectHero";
 import MarkdownRenderer from "@/components/ui/markdown";
 import { Button } from "@/components/ui/button";
@@ -546,10 +545,14 @@ The localized driver app dramatically improved performance metrics:
   }
 };
 
+// Create an array of project IDs for navigation
+const projectIds = Object.keys(projectsData);
+
 const Project = () => {
   const { id } = useParams<{ id: string }>();
   const [project, setProject] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // In a real app, this would fetch data from an API
@@ -558,6 +561,46 @@ const Project = () => {
     }
     setIsLoading(false);
   }, [id]);
+
+  const handleNavigation = (direction: 'next' | 'prev') => {
+    if (!id) return;
+    
+    const currentIndex = projectIds.indexOf(id);
+    if (currentIndex === -1) return;
+    
+    let newIndex;
+    if (direction === 'next') {
+      newIndex = (currentIndex + 1) % projectIds.length;
+    } else {
+      newIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
+    }
+    
+    navigate(`/project/${projectIds[newIndex]}`);
+  };
+
+  // Get next and previous project details for buttons
+  const getAdjacentProject = (direction: 'next' | 'prev') => {
+    if (!id) return null;
+    
+    const currentIndex = projectIds.indexOf(id);
+    if (currentIndex === -1) return null;
+    
+    let adjacentIndex;
+    if (direction === 'next') {
+      adjacentIndex = (currentIndex + 1) % projectIds.length;
+    } else {
+      adjacentIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
+    }
+    
+    const adjacentId = projectIds[adjacentIndex];
+    return {
+      id: adjacentId,
+      title: projectsData[adjacentId as keyof typeof projectsData]?.title || 'Project'
+    };
+  };
+
+  const prevProject = getAdjacentProject('prev');
+  const nextProject = getAdjacentProject('next');
 
   if (isLoading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -598,18 +641,24 @@ const Project = () => {
       <section className="pt-20 border-t border-lightGray">
         <div className="container-tight">
           <div className="flex justify-between items-center">
-            <Button variant="ghost" asChild>
-              <Link to="/" className="flex items-center text-dark hover:text-primary">
+            <Button variant="ghost" onClick={() => handleNavigation('prev')}>
+              <div className="flex items-center text-dark hover:text-primary">
                 <ArrowLeft size={16} className="mr-2" />
-                <span>All Projects</span>
-              </Link>
+                <span>{prevProject?.title || 'Previous Project'}</span>
+              </div>
             </Button>
             
             <Button variant="ghost" asChild>
               <Link to="/" className="flex items-center text-dark hover:text-primary">
-                <span>Next Project</span>
-                <ArrowRight size={16} className="ml-2" />
+                <span>All Projects</span>
               </Link>
+            </Button>
+            
+            <Button variant="ghost" onClick={() => handleNavigation('next')}>
+              <div className="flex items-center text-dark hover:text-primary">
+                <span>{nextProject?.title || 'Next Project'}</span>
+                <ArrowRight size={16} className="ml-2" />
+              </div>
             </Button>
           </div>
         </div>
