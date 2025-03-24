@@ -13,7 +13,12 @@ export default defineConfig(({ mode }) => ({
   base: './', // This ensures assets are loaded correctly on GitHub Pages
   server: {
     host: "::",
-    port: 8080
+    port: 8080,
+    hmr: {
+      // Specify proper HMR settings to handle WebSocket tokens
+      clientPort: 443,
+      protocol: 'wss'
+    }
   },
   build: {
     outDir: 'dist',
@@ -32,5 +37,9 @@ export default defineConfig(({ mode }) => ({
   },
   esbuild: {
     target: 'es2020'
+  },
+  define: {
+    // Define the WebSocket token to prevent the reference error
+    __WS_TOKEN__: JSON.stringify('lovable-ws-token')
   }
 }))
