@@ -1,5 +1,6 @@
 
 import React from 'react';
+import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
   const projectsList = [
@@ -32,27 +33,13 @@ const Projects = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectsList.map(project => (
-          <div key={project.id} className="border rounded-lg overflow-hidden bg-white dark:bg-gray-800">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-2">{project.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                View Details
-              </button>
-            </div>
-          </div>
+          <ProjectCard
+            key={project.id}
+            title={project.title}
+            description={project.description}
+            technologies={project.technologies}
+            image={project.image}
+          />
         ))}
       </div>
     </div>

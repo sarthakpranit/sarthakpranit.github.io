@@ -70,9 +70,9 @@ const Navbar = () => {
           </div>
         </div>
         
-        {/* Mobile menu */}
+        {/* Mobile menu with solid background */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
             <div className="flex flex-col space-y-2">
               {navLinks.map(link => (
                 <Link
