@@ -6,4 +6,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: './', // This ensures assets are loaded correctly on GitHub Pages
+  server: {
+    port: 8080
+  }
 })
