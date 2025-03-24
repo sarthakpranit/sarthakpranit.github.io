@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { ThemeProvider } from "@/hooks/use-theme";
+import { ThemeProvider } from "./hooks/use-theme";
 
 // Pages
 import Index from "./pages/Index";
