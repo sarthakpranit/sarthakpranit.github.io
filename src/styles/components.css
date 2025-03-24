@@ -1,0 +1,58 @@
+
+@layer components {
+  .container-tight {
+    @apply max-w-4xl mx-auto px-4 sm:px-6;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hover-link {
+    @apply relative overflow-hidden;
+  }
+
+  .hover-link::after {
+    @apply content-[''] absolute w-full h-0.5 bg-primary bottom-0 left-0;
+    transform: translateX(-101%);
+    transition: transform 0.25s ease;
+  }
+
+  .hover-link:hover::after {
+    transform: translateX(0);
+  }
+
+  .animate-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+  
+  .img-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+  
+  .img-hover:hover {
+    @apply scale-[1.03];
+  }
+  
+  /* Dark mode improvements for component classes */
+  .dark .hover-link::after {
+    @apply bg-primary; /* Ensure link underlines remain visible */
+  }
+  
+  .dark .card-hover:hover {
+    @apply shadow-gray-800;
+  }
+
+  /* Additional dark mode improvements for cards */
+  .dark .project-card:hover, .dark .blog-card:hover {
+    @apply shadow-lg shadow-gray-900/50;
+  }
+}

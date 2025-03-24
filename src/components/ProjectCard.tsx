@@ -1,36 +1,66 @@
 
-import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
+  id: string;
   title: string;
   description: string;
-  technologies: string[];
-  image: string;
+  thumbnail: string;
+  categories: string[];
+  featured?: boolean;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, technologies, image }) => {
+const ProjectCard = ({ 
+  id, 
+  title, 
+  description, 
+  thumbnail, 
+  categories, 
+  featured = false 
+}: ProjectCardProps) => {
   return (
-    <div className="border rounded-lg overflow-hidden bg-white dark:bg-gray-800">
-      <img 
-        src={image} 
-        alt={title} 
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-6">
-        <h2 className="text-xl font-semibold mb-2">{title}</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, index) => (
-            <span key={index} className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full">
-              {tech}
-            </span>
-          ))}
+    <Link 
+      to={`/project/${id}`}
+      className="group block p-6 -mx-6 rounded-lg"
+    >
+      <div className="flex flex-col md:flex-row gap-6 items-start">
+        <div className="w-full md:w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg bg-lightGray">
+          <img 
+            src={thumbnail} 
+            alt={title}
+            className="w-full h-full object-cover"
+          />
         </div>
-        <button className="w-full py-2 bg-blue-600 text-white rounded">
-          View Details
-        </button>
+        
+        <div className="flex-1 space-y-3">
+          <div className="flex flex-wrap gap-2">
+            {categories.map(category => (
+              <span 
+                key={category} 
+                className="text-xs font-medium uppercase tracking-wider text-dark/70"
+              >
+                {category}
+              </span>
+            ))}
+          </div>
+          
+          <h3 className="text-xl font-medium text-balance group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          
+          <p className="text-dark/80 text-balance">
+            {description}
+          </p>
+          
+          <div className="pt-2 flex items-center text-primary font-medium">
+            <span>View project</span>
+            <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -1,0 +1,101 @@
+
+@layer base {
+  /* Dark mode specific styles for better visibility */
+  .dark .text-dark\/80 {
+    @apply text-gray-200;
+  }
+  
+  .dark .text-dark\/70 {
+    @apply text-gray-300;
+  }
+  
+  .dark .bg-lightGray {
+    @apply bg-gray-800;
+  }
+  
+  /* Improved contrast for links in dark mode */
+  .dark a:not(.hover-link) {
+    @apply text-primary hover:text-primary-hover;
+  }
+  
+  /* Ensuring buttons have appropriate contrast */
+  .dark .bg-white\/90 {
+    @apply bg-dark/90;
+  }
+  
+  /* Improved visibility for card backgrounds */
+  .dark .bg-card {
+    @apply bg-gray-900;
+  }
+
+  /* Improved input field contrast */
+  .dark input, .dark textarea, .dark select {
+    @apply bg-gray-800 border-gray-700 text-white;
+  }
+
+  /* Project and blog card improvements for dark mode */
+  .dark .project-card, .dark .blog-card {
+    @apply bg-gray-900 border-gray-700;
+  }
+
+  .dark .project-card h3, .dark .blog-card h3, 
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-white;
+  }
+
+  .dark .project-card p, .dark .blog-card p, 
+  .dark p:not(.text-primary):not(.text-white) {
+    @apply text-gray-300;
+  }
+
+  .dark .categories span {
+    @apply bg-gray-800 text-gray-200;
+  }
+  
+  /* Fix project navigation text */
+  .dark .text-dark {
+    @apply text-white;
+  }
+  
+  /* Fix any remaining text visibility issues */
+  .dark a.text-dark {
+    @apply text-white hover:text-primary;
+  }
+  
+  /* Fix project page content visibility */
+  .dark blockquote {
+    @apply bg-gray-800 border-l-4 border-primary text-gray-200;
+  }
+  
+  .dark strong, .dark b {
+    @apply text-white;
+  }
+  
+  .dark ol, .dark ul {
+    @apply text-gray-300;
+  }
+  
+  /* Fix code blocks and inline code visibility */
+  .dark code, .dark pre {
+    @apply bg-gray-800 text-gray-200;
+  }
+  
+  /* Specific fixes for labels and other UI elements */
+  .dark label {
+    @apply text-gray-200;
+  }
+  
+  /* Button text contrast improvement */
+  .dark button:not(.bg-primary) span {
+    @apply text-inherit;
+  }
+
+  /* Fix mobile sidebar background and navigation */
+  .dark [data-sidebar="sidebar"][data-mobile="true"] {
+    @apply bg-dark border-gray-700;
+  }
+  
+  .dark .md\:hidden.fixed.inset-0.z-40 {
+    @apply bg-dark;
+  }
+}
