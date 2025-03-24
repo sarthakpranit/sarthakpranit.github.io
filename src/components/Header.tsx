@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -54,15 +53,8 @@ const Header = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link 
           to="/" 
-          className="text-lg font-semibold tracking-tight animate-hover dark:text-white flex items-center gap-2"
+          className="text-lg font-semibold tracking-tight animate-hover dark:text-white"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden">
-            <img 
-              src="/lovable-uploads/66670f6f-be04-44ee-9d6e-bfb17e8e3691.png" 
-              alt="Sarthak Pranit" 
-              className="w-full h-full object-cover object-center"
-            />
-          </div>
           Sarthak Pranit
         </Link>
 

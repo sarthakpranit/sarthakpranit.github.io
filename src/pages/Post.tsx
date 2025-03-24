@@ -103,7 +103,7 @@ const Post = () => {
             <Button variant="ghost" onClick={() => handleNavigation('prev')}>
               <div className="flex items-center text-dark hover:text-primary">
                 <ArrowLeft size={16} className="mr-2" />
-                <span>{prevPost?.title || 'Previous Article'}</span>
+                <span>Previous</span>
               </div>
             </Button>
             
@@ -115,7 +115,7 @@ const Post = () => {
             
             <Button variant="ghost" onClick={() => handleNavigation('next')}>
               <div className="flex items-center text-dark hover:text-primary">
-                <span>{nextPost?.title || 'Next Article'}</span>
+                <span>Next</span>
                 <ArrowRight size={16} className="ml-2" />
               </div>
             </Button>

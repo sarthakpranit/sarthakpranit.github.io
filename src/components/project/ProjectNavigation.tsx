@@ -27,7 +27,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
           <Button variant="ghost" onClick={() => onNavigate('prev')}>
             <div className="flex items-center text-dark hover:text-primary">
               <ArrowLeft size={16} className="mr-2" />
-              <span>{prevProject?.title || 'Previous Project'}</span>
+              <span>Previous</span>
             </div>
           </Button>
           
@@ -39,7 +39,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({
           
           <Button variant="ghost" onClick={() => onNavigate('next')}>
             <div className="flex items-center text-dark hover:text-primary">
-              <span>{nextProject?.title || 'Next Project'}</span>
+              <span>Next</span>
               <ArrowRight size={16} className="ml-2" />
             </div>
           </Button>
