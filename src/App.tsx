@@ -1,4 +1,3 @@
-
 import { Toaster } from "./components/ui/toaster";
 import { Toaster as Sonner } from "./components/ui/sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
@@ -8,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { ThemeProvider } from "./hooks/use-theme";
+import PasswordProtection from "./components/PasswordProtection";
 
 // Pages
 import Index from "./pages/Index";
@@ -54,19 +54,21 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Header />
-          <PageTransition>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/project/:id" element={<Project />} />
-              <Route path="/post/:id" element={<Post />} />
-              <Route path="/timeline" element={<Timeline />} />
-              <Route path="/about" element={<About />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </PageTransition>
-          <Footer />
+          <PasswordProtection>
+            <Header />
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/project/:id" element={<Project />} />
+                <Route path="/post/:id" element={<Post />} />
+                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </PageTransition>
+            <Footer />
+          </PasswordProtection>
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
