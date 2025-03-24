@@ -55,7 +55,7 @@ export function useProject(): UseProjectResult {
   }, [getCurrentIndex]);
 
   const navigateToProject = useCallback((projectId: string) => {
-    navigate(`/projects/${projectId}`);
+    navigate(`/project/${projectId}`);
   }, [navigate]);
 
   useEffect(() => {
