@@ -5,12 +5,9 @@ import { blogPostsData } from "@/data/blogPostsData";
 import PostHeader from "@/components/post/PostHeader";
 import PostImage from "@/components/post/PostImage";
 import PostContent from "@/components/post/PostContent";
+import PostNavigation from "@/components/post/PostNavigation";
 import PostNotFound from "@/components/post/PostNotFound";
 import Loading from "@/components/ui/Loading";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Separator } from "@/components/ui/separator";
 
 // Create an array of post IDs for navigation
 const postIds = Object.keys(blogPostsData);
@@ -95,32 +92,13 @@ const Post = () => {
         )}
         
         <PostContent content={post.content} />
-
+        
         {/* Post Navigation */}
-        <div className="mt-16">
-          <Separator className="mb-8" />
-          <div className="flex justify-between items-center">
-            <Button variant="ghost" onClick={() => handleNavigation('prev')}>
-              <div className="flex items-center text-dark hover:text-primary">
-                <ArrowLeft size={16} className="mr-2" />
-                <span>Previous</span>
-              </div>
-            </Button>
-            
-            <Button variant="ghost" asChild>
-              <Link to="/blog" className="flex items-center text-dark hover:text-primary">
-                <span>All Articles</span>
-              </Link>
-            </Button>
-            
-            <Button variant="ghost" onClick={() => handleNavigation('next')}>
-              <div className="flex items-center text-dark hover:text-primary">
-                <span>Next</span>
-                <ArrowRight size={16} className="ml-2" />
-              </div>
-            </Button>
-          </div>
-        </div>
+        <PostNavigation 
+          prevPost={prevPost}
+          nextPost={nextPost}
+          onNavigate={handleNavigation}
+        />
       </div>
     </div>
   );
