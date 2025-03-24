@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import ProjectHero from "@/components/ProjectHero";
-import MarkdownRenderer from "@/components/ui/markdown";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import ProjectHero from "@/components/ProjectHero";
+import ProjectContent from "@/components/project/ProjectContent";
+import ProjectNavigation from "@/components/project/ProjectNavigation";
+import { useProject } from "@/hooks/useProject";
 
 // Project data based on Sarthak's CV
 const projectsData = {
@@ -504,7 +502,7 @@ I conducted extensive research with drivers across regions:
 - Mapped language and literacy preferences
 - Identified key pain points in the existing app
 
-![Driver Research](https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80)
+![Driver Research](https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)
 
 ### 2. Visual Communication Strategy
 I developed a visual-first approach to interface design:
@@ -545,62 +543,14 @@ The localized driver app dramatically improved performance metrics:
   }
 };
 
-// Create an array of project IDs for navigation
-const projectIds = Object.keys(projectsData);
-
 const Project = () => {
-  const { id } = useParams<{ id: string }>();
-  const [project, setProject] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // In a real app, this would fetch data from an API
-    if (id && projectsData[id as keyof typeof projectsData]) {
-      setProject(projectsData[id as keyof typeof projectsData]);
-    }
-    setIsLoading(false);
-  }, [id]);
-
-  const handleNavigation = (direction: 'next' | 'prev') => {
-    if (!id) return;
-    
-    const currentIndex = projectIds.indexOf(id);
-    if (currentIndex === -1) return;
-    
-    let newIndex;
-    if (direction === 'next') {
-      newIndex = (currentIndex + 1) % projectIds.length;
-    } else {
-      newIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
-    }
-    
-    navigate(`/project/${projectIds[newIndex]}`);
-  };
-
-  // Get next and previous project details for buttons
-  const getAdjacentProject = (direction: 'next' | 'prev') => {
-    if (!id) return null;
-    
-    const currentIndex = projectIds.indexOf(id);
-    if (currentIndex === -1) return null;
-    
-    let adjacentIndex;
-    if (direction === 'next') {
-      adjacentIndex = (currentIndex + 1) % projectIds.length;
-    } else {
-      adjacentIndex = (currentIndex - 1 + projectIds.length) % projectIds.length;
-    }
-    
-    const adjacentId = projectIds[adjacentIndex];
-    return {
-      id: adjacentId,
-      title: projectsData[adjacentId as keyof typeof projectsData]?.title || 'Project'
-    };
-  };
-
-  const prevProject = getAdjacentProject('prev');
-  const nextProject = getAdjacentProject('next');
+  const { 
+    project, 
+    isLoading, 
+    handleNavigation, 
+    prevProject, 
+    nextProject 
+  } = useProject(projectsData);
 
   if (isLoading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
@@ -631,38 +581,14 @@ const Project = () => {
       />
 
       {/* Project Content */}
-      <section className="pt-16">
-        <div className="container-tight">
-          <MarkdownRenderer content={project.content} />
-        </div>
-      </section>
+      <ProjectContent content={project.content} />
 
       {/* Project Navigation */}
-      <section className="pt-20 border-t border-lightGray">
-        <div className="container-tight">
-          <div className="flex justify-between items-center">
-            <Button variant="ghost" onClick={() => handleNavigation('prev')}>
-              <div className="flex items-center text-dark hover:text-primary">
-                <ArrowLeft size={16} className="mr-2" />
-                <span>{prevProject?.title || 'Previous Project'}</span>
-              </div>
-            </Button>
-            
-            <Button variant="ghost" asChild>
-              <Link to="/" className="flex items-center text-dark hover:text-primary">
-                <span>All Projects</span>
-              </Link>
-            </Button>
-            
-            <Button variant="ghost" onClick={() => handleNavigation('next')}>
-              <div className="flex items-center text-dark hover:text-primary">
-                <span>{nextProject?.title || 'Next Project'}</span>
-                <ArrowRight size={16} className="ml-2" />
-              </div>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <ProjectNavigation 
+        prevProject={prevProject}
+        nextProject={nextProject}
+        onNavigate={handleNavigation}
+      />
     </div>
   );
 };
