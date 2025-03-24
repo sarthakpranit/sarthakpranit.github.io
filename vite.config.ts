@@ -25,14 +25,27 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-    },
+    }
   },
   optimizeDeps: {
+    include: ['react', 'react-dom'],
     esbuildOptions: {
-      target: 'es2020'
+      target: 'es2020',
+      tsconfigRaw: {
+        compilerOptions: {
+          useDefineForClassFields: true,
+          target: 'es2020',
+          module: 'es2020',
+        }
+      }
     }
   },
   esbuild: {
-    target: 'es2020'
+    target: 'es2020',
+    tsconfigRaw: {
+      compilerOptions: {
+        useDefineForClassFields: true
+      }
+    }
   }
 }))
