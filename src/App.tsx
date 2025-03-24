@@ -1,3 +1,4 @@
+
 import { Toaster } from "./components/ui/toaster";
 import { Toaster as Sonner } from "./components/ui/sonner";
 import { TooltipProvider } from "./components/ui/tooltip";
@@ -47,6 +48,16 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// Skip to content link component
+const SkipToContent = () => (
+  <a 
+    href="#main-content" 
+    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md focus:outline-none"
+  >
+    Skip to content
+  </a>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
@@ -55,6 +66,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <PasswordProtection>
+            <SkipToContent />
             <Header />
             <PageTransition>
               <Routes>

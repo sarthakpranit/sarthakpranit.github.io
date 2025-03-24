@@ -20,17 +20,19 @@ const BlogCard = ({
   categories
 }: BlogCardProps) => {
   return (
-    <Link 
-      to={`/post/${id}`}
-      className="group block p-6 -mx-6 rounded-lg"
-    >
-      <div className="flex flex-col md:flex-row gap-6">
+    <article className="group block p-6 -mx-6 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+      <Link 
+        to={`/post/${id}`}
+        className="flex flex-col md:flex-row gap-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
+        aria-labelledby={`blog-title-${id}`}
+      >
         {thumbnail && (
           <div className="w-full md:w-28 h-28 flex-shrink-0 overflow-hidden rounded-lg bg-lightGray dark:bg-gray-800">
             <img 
               src={thumbnail} 
-              alt={title}
+              alt={`Thumbnail for article: ${title}`}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
         )}
@@ -40,18 +42,24 @@ const BlogCard = ({
             {categories.map(category => (
               <span 
                 key={category} 
-                className="text-xs font-medium uppercase tracking-wider text-dark/70 dark:text-gray-300"
+                className="text-xs font-medium uppercase tracking-wider text-dark/80 dark:text-gray-300"
               >
                 {category}
               </span>
             ))}
           </div>
           
-          <div className="text-sm text-dark/70 dark:text-gray-400">
+          <time 
+            dateTime={new Date(date).toISOString()} 
+            className="text-sm text-dark/80 dark:text-gray-300 block"
+          >
             {date}
-          </div>
+          </time>
           
-          <h3 className="text-xl font-medium text-balance group-hover:text-primary transition-colors dark:text-white">
+          <h3 
+            id={`blog-title-${id}`}
+            className="text-xl font-medium text-balance group-hover:text-primary transition-colors dark:text-white"
+          >
             {title}
           </h3>
           
@@ -61,11 +69,11 @@ const BlogCard = ({
           
           <div className="pt-2 flex items-center text-primary font-medium">
             <span>Read more</span>
-            <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </article>
   );
 };
 

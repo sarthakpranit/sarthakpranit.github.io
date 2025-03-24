@@ -18,15 +18,22 @@ const Blog = () => {
   // Ensure proper scroll position when navigating to the blog page
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Set page title for screen readers
+    document.title = "Articles | Sarthak Pranit";
   }, []);
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6">
+    <main 
+      className="min-h-screen pt-32 pb-20 px-6"
+      id="main-content"
+      tabIndex={-1}
+    >
       <div className="max-w-4xl mx-auto">
         <BlogHeader />
         <BlogList posts={postsArray} />
       </div>
-    </div>
+    </main>
   );
 };
 

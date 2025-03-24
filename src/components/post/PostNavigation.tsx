@@ -21,29 +21,49 @@ const PostNavigation: React.FC<PostNavigationProps> = ({
   onNavigate 
 }) => {
   return (
-    <div className="mt-16">
+    <nav className="mt-16" aria-label="Post navigation">
       <div className="flex justify-between items-center">
-        <Button variant="ghost" onClick={() => onNavigate('prev')}>
-          <div className="flex items-center text-dark hover:text-primary">
+        <Button 
+          variant="ghost" 
+          onClick={() => onNavigate('prev')}
+          aria-label={prevPost ? `Previous post: ${prevPost.title}` : "Previous post"}
+          disabled={!prevPost}
+          className="focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+        >
+          <div className="flex items-center text-dark hover:text-primary dark:text-gray-300">
             <ArrowLeft size={16} className="mr-2" />
             <span>Previous</span>
           </div>
         </Button>
         
-        <Button variant="ghost" asChild>
-          <Link to="/blog" className="flex items-center text-dark hover:text-primary">
+        <Button 
+          variant="ghost" 
+          asChild
+          className="focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+        >
+          <Link 
+            to="/blog" 
+            className="flex items-center text-dark hover:text-primary dark:text-gray-300"
+            aria-label="View all articles"
+          >
             <span>All Articles</span>
           </Link>
         </Button>
         
-        <Button variant="ghost" onClick={() => onNavigate('next')}>
-          <div className="flex items-center text-dark hover:text-primary">
+        <Button 
+          variant="ghost" 
+          onClick={() => onNavigate('next')}
+          aria-label={nextPost ? `Next post: ${nextPost.title}` : "Next post"}
+          disabled={!nextPost}
+          className="focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+        >
+          <div className="flex items-center text-dark hover:text-primary dark:text-gray-300">
             <span>Next</span>
             <ArrowRight size={16} className="ml-2" />
           </div>
         </Button>
       </div>
-    </div>
+    </nav>
   );
 };
 

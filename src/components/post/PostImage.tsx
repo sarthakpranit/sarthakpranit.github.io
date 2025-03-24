@@ -7,14 +7,18 @@ interface PostImageProps {
 }
 
 const PostImage: React.FC<PostImageProps> = ({ src, alt }) => {
+  // Enhance alt text to be more descriptive
+  const enhancedAlt = `Featured image for article: ${alt}`;
+  
   return (
-    <div className="mb-12 w-full aspect-[16/9] rounded-lg overflow-hidden bg-lightGray dark:bg-gray-800">
+    <figure className="mb-12 w-full aspect-[16/9] rounded-lg overflow-hidden bg-lightGray dark:bg-gray-800">
       <img 
         src={src} 
-        alt={alt} 
+        alt={enhancedAlt} 
         className="w-full h-full object-cover"
+        loading="lazy" // Add lazy loading for performance
       />
-    </div>
+    </figure>
   );
 };
 
