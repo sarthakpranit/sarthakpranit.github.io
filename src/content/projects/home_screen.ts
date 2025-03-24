@@ -5,6 +5,7 @@ const project: Project = {
   title: "Home Screen Orchestration",
   description: "Led cross-functional UX for 9M daily users, balancing user needs with 54+ teams' business goals.",
   date: "2019-2020",
+  slug: "home_screen",
   client: "Booking.com",
   role: "Lead Product Designer",
   categories: ["UX Design", "Personalization"],
