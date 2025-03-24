@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => ({
   },
   define: {
     // Define the WebSocket token in a way that works for both development and production
-    '__WS_TOKEN__': '"lovable-ws-token"',
-    'process.env.__WS_TOKEN__': '"lovable-ws-token"'
+    '__WS_TOKEN__': JSON.stringify('lovable-ws-token'),
+    'process.env.__WS_TOKEN__': JSON.stringify('lovable-ws-token')
   }
 }))
