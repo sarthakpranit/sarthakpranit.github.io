@@ -1,7 +1,7 @@
 import { Project } from '../../types/content';
 
 const project: Project = {
-  id: "home-screen",
+  id: "home_screen",
   title: "Home Screen Orchestration",
   description: "Led cross-functional UX for 9M daily users, balancing user needs with 54+ teams' business goals.",
   date: "2019-2020",

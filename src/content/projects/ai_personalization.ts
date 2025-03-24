@@ -1,7 +1,7 @@
 import { Project } from '../../types/content';
 
 const project: Project = {
-  id: "ai-personalization",
+  id: "ai_personalization",
   title: "AI-Driven Personalization Platform",
   description: "Led UX strategy for a platform serving 94 teams, enabling predictive & generative AI capabilities that drove €200M+ revenue.",
   date: "2020-2023",

@@ -13,6 +13,7 @@ export interface Project extends BaseContent {
   role: string;
   categories: string[];
   heroImage: string;
+  thumbnail: string;
   content: string;
   technologies?: string[];
   links?: {

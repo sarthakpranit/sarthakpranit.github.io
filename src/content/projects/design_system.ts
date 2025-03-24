@@ -1,7 +1,7 @@
 import { Project } from '../../types/content';
 
 const project: Project = {
-  id: "design-system",
+  id: "design_system",
   title: "App UX Standards & Design System",
   description: "Co-led App UX Standards, ensuring consistency across 200+ designers.",
   date: "2016-2017",
