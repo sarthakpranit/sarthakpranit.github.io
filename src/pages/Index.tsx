@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { loadProjects } from "@/lib/content";
 
@@ -39,6 +39,16 @@ const Index = () => {
     }
   };
 
+  const downloadCV = () => {
+    // Create a link element
+    const link = document.createElement('a');
+    link.href = '/cv/SarthakPranit_CV.pdf'; // Update this path to your actual CV file
+    link.download = 'SarthakPranit_CV.pdf'; // The name that will be used when downloading
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with center alignment */}
@@ -74,7 +84,12 @@ const Index = () => {
             >
               View Projects
             </Button>
-            <Button variant="outline" className="border-dark/20 hover:bg-lightGray dark:border-gray-700 dark:hover:bg-gray-700 dark:text-white">
+            <Button 
+              variant="outline" 
+              className="border-dark/20 hover:bg-lightGray dark:border-gray-700 dark:hover:bg-gray-700 dark:text-white"
+              onClick={downloadCV}
+            >
+              <Download className="mr-2 h-4 w-4" />
               Download CV
             </Button>
           </div>
