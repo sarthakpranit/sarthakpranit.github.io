@@ -5,6 +5,7 @@ const project: Project = {
   title: "AI-Driven Personalization Platform",
   description: "Led UX strategy for a platform serving 94 teams, enabling predictive & generative AI capabilities that drove €200M+ revenue.",
   date: "2020-2023",
+  slug: "ai_personalization",
   client: "Booking.com",
   role: "Lead Product Designer",
   categories: ["AI/ML Design", "UX Strategy", "Personalization"],
