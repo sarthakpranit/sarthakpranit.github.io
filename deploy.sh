@@ -13,12 +13,16 @@ cd dist
 # create a .nojekyll file to bypass GitHub Pages Jekyll processing
 touch .nojekyll
 
+# if you are deploying to a custom domain
+# echo 'www.example.com' > CNAME
+
 # initialize git in the dist directory
 git init
 git add -A
 git commit -m 'deploy'
 
 # push to the gh-pages branch
-git push -f git@github.com:yourusername/your-repo-name.git master:gh-pages
+# if you are deploying to https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:sarthakpranit/portfolio.git master:gh-pages
 
 cd -
