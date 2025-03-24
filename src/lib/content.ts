@@ -64,9 +64,10 @@ export const projectContent = {
     try {
       // Use static glob pattern for the specific file
       const files = import.meta.glob('../content/projects/*.ts', { eager: true });
-      const filePath = Object.keys(files).find(path => path.includes(id));
+      const filePath = Object.keys(files).find(path => path.endsWith(`${id}.ts`));
       
       if (!filePath) {
+        console.error(`Project file not found for ID: ${id}`);
         return null;
       }
 
