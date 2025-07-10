@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Moon, Sun, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,19 +34,19 @@ const Index = () => {
       title: "E-commerce Platform Redesign",
       subtitle: "Redesigning the shopping experience for a major retailer",
       roles: "Product Design, User Research",
-      link: "#"
+      link: "/case-studies"
     },
     {
       title: "Healthcare App Interface",
       subtitle: "Streamlining patient care through digital solutions",
       roles: "UX/UI Design, Prototyping",
-      link: "#"
+      link: "/case-studies"
     },
     {
       title: "Fintech Dashboard",
       subtitle: "Creating intuitive financial management tools",
       roles: "Product Strategy, Visual Design",
-      link: "#"
+      link: "/case-studies"
     }
   ];
 
@@ -136,9 +137,9 @@ const Index = () => {
             
             <div className="space-y-8">
               {caseStudies.map((study, index) => (
-                <a
+                <Link
                   key={index}
-                  href={study.link}
+                  to={study.link}
                   className="block group hover:bg-muted/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
                 >
                   <div className="flex justify-between items-start">
@@ -151,7 +152,7 @@ const Index = () => {
                     </div>
                     <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors ml-4 mt-1" />
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
