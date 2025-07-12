@@ -1,12 +1,25 @@
 
+import { useState, useEffect } from "react";
+import SocialLinks from "./sections/SocialLinks";
+
 const AboutSection = () => {
-  const socialLinks = [
-    { name: "Twitter", url: "#" },
-    { name: "Instagram", url: "#" },
-    { name: "LinkedIn", url: "#" },
-    { name: "Dribbble", url: "#" },
-    { name: "CV", url: "#", isCV: true }
-  ];
+  const [socialLinks, setSocialLinks] = useState([]);
+
+  useEffect(() => {
+    // Load social links data
+    const loadSocialLinks = async () => {
+      const socialLinksData = [
+        { name: "Twitter", url: "#" },
+        { name: "Instagram", url: "#" },
+        { name: "LinkedIn", url: "#" },
+        { name: "Dribbble", url: "#" },
+        { name: "CV", url: "#", isCV: true }
+      ];
+      setSocialLinks(socialLinksData);
+    };
+
+    loadSocialLinks();
+  }, []);
 
   return (
     <div className="space-y-8">
@@ -21,20 +34,7 @@ const AboutSection = () => {
           philosophy, or enjoying a good cup of coffee.
         </p>
         
-        <div className="flex space-x-6">
-          {socialLinks.map((link, index) => (
-            <a 
-              key={index}
-              href={link.url} 
-              className={`text-muted-foreground hover:text-foreground transition-colors ${
-                link.isCV ? 'font-medium' : ''
-              }`}
-              {...(link.isCV && { target: '_blank', rel: 'noopener noreferrer' })}
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+        <SocialLinks links={socialLinks} />
       </div>
     </div>
   );

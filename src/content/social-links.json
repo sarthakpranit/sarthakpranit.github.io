@@ -1,0 +1,8 @@
+
+[
+  { "name": "Twitter", "url": "#" },
+  { "name": "Instagram", "url": "#" },
+  { "name": "LinkedIn", "url": "#" },
+  { "name": "Dribbble", "url": "#" },
+  { "name": "CV", "url": "#", "isCV": true }
+]

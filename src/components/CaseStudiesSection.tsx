@@ -1,28 +1,41 @@
 
-import { ExternalLink } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import CaseStudyCard from "./sections/CaseStudyCard";
 
 const CaseStudiesSection = () => {
-  const caseStudies = [
-    {
-      title: "CUJO Smart Firewall",
-      subtitle: "Redesigning home network security for the modern family",
-      roles: "Product Design, User Research",
-      link: "/case-study/1"
-    },
-    {
-      title: "Healthcare Platform",
-      subtitle: "Streamlining patient care through digital innovation",
-      roles: "UX/UI Design, Design System",
-      link: "/case-study/2"
-    },
-    {
-      title: "Fintech Dashboard",
-      subtitle: "Creating intuitive financial management tools",
-      roles: "Product Strategy, Visual Design",
-      link: "/case-study/3"
-    }
-  ];
+  const [caseStudies, setCaseStudies] = useState([]);
+
+  useEffect(() => {
+    // Load case studies data
+    const loadCaseStudies = async () => {
+      const caseStudyData = [
+        {
+          id: 1,
+          title: "CUJO Smart Firewall",
+          subtitle: "Redesigning home network security for the modern family",
+          roles: "Product Design, User Research",
+          link: "/case-study/1"
+        },
+        {
+          id: 2,
+          title: "Healthcare Platform",
+          subtitle: "Streamlining patient care through digital innovation",
+          roles: "UX/UI Design, Design System",
+          link: "/case-study/2"
+        },
+        {
+          id: 3,
+          title: "Fintech Dashboard",
+          subtitle: "Creating intuitive financial management tools",
+          roles: "Product Strategy, Visual Design",
+          link: "/case-study/3"
+        }
+      ];
+      setCaseStudies(caseStudyData);
+    };
+
+    loadCaseStudies();
+  }, []);
 
   return (
     <div className="space-y-8 mb-20">
@@ -31,23 +44,15 @@ const CaseStudiesSection = () => {
       </h2>
       
       <div className="space-y-8">
-        {caseStudies.map((study, index) => (
-          <Link
-            key={index}
-            to={study.link}
-            className="block group hover:bg-muted/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
-          >
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <h3 className="text-xl text-foreground font-medium mb-2 group-hover:text-primary transition-colors">
-                  {study.title}
-                </h3>
-                <p className="text-muted-foreground mb-2">{study.subtitle}</p>
-                <p className="text-sm text-muted-foreground">{study.roles}</p>
-              </div>
-              <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors ml-4 mt-1" />
-            </div>
-          </Link>
+        {caseStudies.map((study) => (
+          <CaseStudyCard
+            key={study.id}
+            id={study.id}
+            title={study.title}
+            subtitle={study.subtitle}
+            roles={study.roles}
+            link={study.link}
+          />
         ))}
       </div>
     </div>
