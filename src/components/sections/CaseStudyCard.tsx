@@ -12,7 +12,7 @@ interface CaseStudyCardProps {
 
 const CaseStudyCard = ({ title, subtitle, roles, link }: CaseStudyCardProps) => {
   return (
-    <div className="block group hover:bg-muted/50 -mx-4 px-4 py-4 rounded-lg transition-colors">
+    <div className="block group -mx-4 px-4 py-4 rounded-lg transition-colors">
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <h3 className="text-xl text-foreground font-medium mb-2 group-hover:text-primary transition-colors">
