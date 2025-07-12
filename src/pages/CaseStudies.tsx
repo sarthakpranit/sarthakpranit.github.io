@@ -145,12 +145,12 @@ const CaseStudies = () => {
               <p className="text-muted-foreground mb-8">
                 Let's discuss your next project and how we can bring your vision to life.
               </p>
-              <Link 
-                to="/"
+              <a 
+                href="mailto:sarthakpranit@gmail.com"
                 className="inline-flex items-center px-6 py-3 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-colors"
               >
                 Get in Touch
-              </Link>
+              </a>
             </div>
           </div>
         </div>

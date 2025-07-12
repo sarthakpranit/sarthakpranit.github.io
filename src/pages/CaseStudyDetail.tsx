@@ -5,6 +5,8 @@ import ThemeToggle from "../components/ThemeToggle";
 import { OptimizedImage } from "../components/ui/optimized-image";
 import { useTheme } from "@/hooks/use-theme";
 import { loadCaseStudyById, loadAllCaseStudies } from "@/utils/contentLoader";
+import { PasswordGate } from '@/components/ui/password-gate';
+import { getPassword, getSessionKey, isPasswordProtectionEnabled } from '@/config/passwords';
 
 const CaseStudyDetail = () => {
   const { id } = useParams();
@@ -73,11 +75,12 @@ const CaseStudyDetail = () => {
   }
 
   const { frontmatter, sections } = caseStudy;
+  const caseStudyId = parseInt(id!);
 
-  return (
+  // Extracted content for easier wrapping
+  const CaseStudyContent = () => (
     <div className="min-h-screen bg-background text-foreground">
       <ThemeToggle variant="default" />
-      
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           {/* Back Navigation */}
@@ -213,6 +216,22 @@ const CaseStudyDetail = () => {
         </div>
       </div>
     </div>
+  );
+
+  // Password protection logic
+  if (!isPasswordProtectionEnabled()) {
+    return <CaseStudyContent />;
+  }
+
+  return (
+    <PasswordGate
+      password={getPassword(caseStudyId)}
+      sessionKey={getSessionKey(caseStudyId)}
+      title="This Case Study is Password Protected for sensitive reasons"
+      subtitle={`Please enter the password to view \"${frontmatter.title}\".`}
+    >
+      <CaseStudyContent />
+    </PasswordGate>
   );
 };
 
