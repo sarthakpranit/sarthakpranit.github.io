@@ -9,7 +9,7 @@ const CaseStudiesSection = () => {
 
   return (
     <div className="space-y-8 mb-20">
-      <h2 className="text-sm uppercase tracking-wider text-muted-foreground font-medium">
+      <h2 className="text-base uppercase tracking-widest text-muted-foreground font-semibold mb-8">
         Case Studies
       </h2>
       <div className="space-y-8">

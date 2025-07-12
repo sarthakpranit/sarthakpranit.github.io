@@ -1,6 +1,7 @@
 
 import { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { loadMarkdownContent } from "@/utils/contentLoader";
 import SocialLinks from "./sections/SocialLinks";
 
@@ -10,12 +11,12 @@ const AboutSection = () => {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-sm uppercase tracking-wider text-muted-foreground font-medium">
+      <h2 className="text-base uppercase tracking-widest text-muted-foreground font-semibold mb-8">
         About
       </h2>
       <div className="space-y-6">
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <ReactMarkdown>{aboutContent}</ReactMarkdown>
+        <div className="max-w-none">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{aboutContent}</ReactMarkdown>
         </div>
         <SocialLinks />
       </div>

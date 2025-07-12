@@ -95,8 +95,9 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'sans-serif';
+    font-size: 15px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 }
 
@@ -105,7 +106,21 @@
   @apply text-4xl md:text-5xl font-normal text-foreground mb-12 leading-tight;
 }
 
-/* Animated underline for all links */
+/* Metadata text style */
+.meta {
+  @apply text-xs uppercase tracking-widest text-muted-foreground font-medium;
+}
+
+/* Subtle divider utility */
+.divider {
+  @apply border-t border-border my-12;
+}
+
+/* Accent color for headings/underlines */
+.accent {
+  color: #2563eb; /* Tailwind blue-600 */
+}
+
 a, .prose a {
   position: relative;
   text-decoration: none;

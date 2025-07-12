@@ -20,7 +20,19 @@ const HeroContent = () => {
       <div className="prose prose-lg dark:prose-invert max-w-none">
         {/* Render all lines before the timer line as markdown */}
         {lines.slice(0, timerLineIndex).join('\n').trim() && (
-          <ReactMarkdown>{lines.slice(0, timerLineIndex).join('\n')}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              h1({ children }) {
+                return (
+                  <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] text-foreground mb-12">
+                    {children}
+                  </h1>
+                );
+              },
+            }}
+          >
+            {lines.slice(0, timerLineIndex).join('\n')}
+          </ReactMarkdown>
         )}
         {/* Render the timer line as markdown, replacing the placeholder with the timer */}
         {timerLineIndex !== -1 && (

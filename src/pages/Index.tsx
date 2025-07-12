@@ -20,8 +20,11 @@ const Index = () => {
       <div className="max-w-2xl mx-auto px-6 py-16">
         <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
           <HeroSection />
+          <div className="my-10 border-t border-border" />
           <ExperienceSection />
+          <div className="my-10 border-t border-border" />
           <CaseStudiesSection />
+          <div className="my-10 border-t border-border" />
           <AboutSection />
         </div>
       </div>
