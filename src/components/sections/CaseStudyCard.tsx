@@ -1,5 +1,5 @@
 
-import { ExternalLink } from "lucide-react";
+import { ExternalLink } from "../../utils/iconImports";
 import { Link } from "react-router-dom";
 
 interface CaseStudyCardProps {

@@ -1,73 +1,46 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "../utils/iconImports";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../components/ThemeToggle";
+import { OptimizedImage } from "../components/ui/optimized-image";
+import { useTheme } from "@/hooks/use-theme";
+import { loadCaseStudyMetadata } from "@/utils/contentLoader";
 
 const CaseStudies = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [caseStudies, setCaseStudies] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     setIsVisible(true);
-    // Check for saved theme preference or default to light
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDark(savedTheme === 'dark' || (!savedTheme && prefersDark));
+    // Load case studies
+    try {
+      console.log('Loading case study metadata...');
+      const studies = loadCaseStudyMetadata();
+      console.log('Loaded studies:', studies);
+      setCaseStudies(studies);
+    } catch (error) {
+      console.error('Error loading case studies:', error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
-
-  const caseStudies = [
-    {
-      id: 1,
-      title: "CUJO Smart Firewall",
-      subtitle: "Redesigning home network security for the modern family",
-      description: "CUJO provides the power of enterprise security solutions for simple and elegant devices. I helped CUJO shape their brand and user experience.",
-      roles: ["Product Design", "User Research", "Prototyping"],
-      year: "2024",
-      client: "CUJO AI",
-      link: "/case-study/1",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      title: "Healthcare Platform",
-      subtitle: "Streamlining patient care through digital innovation",
-      description: "A comprehensive healthcare platform that connects patients, doctors, and medical staff through intuitive digital interfaces. The project focused on reducing complexity while maintaining clinical accuracy.",
-      roles: ["UX/UI Design", "Design System", "User Testing"],
-      year: "2023",
-      client: "MedTech Solutions",
-      link: "/case-study/2",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      title: "Fintech Dashboard",
-      subtitle: "Creating intuitive financial management tools",
-      description: "Designed a comprehensive financial dashboard that helps users track expenses, manage investments, and plan for the future. The challenge was making complex financial data accessible and actionable.",
-      roles: ["Product Strategy", "Visual Design", "Data Visualization"],
-      year: "2023",
-      client: "FinanceFlow",
-      link: "/case-study/3",
-      image: "/placeholder.svg"
-    }
-  ];
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading case studies...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+      <ThemeToggle variant="default" />
       
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
@@ -97,10 +70,13 @@ const CaseStudies = () => {
               <article key={study.id} className="group">
                 {/* Project Image */}
                 <Link to={study.link} className="block mb-8 overflow-hidden rounded-lg bg-muted">
-                  <img 
+                  <OptimizedImage 
                     src={study.image} 
                     alt={study.title}
-                    className="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-64 md:h-80 transition-transform duration-500 group-hover:scale-105"
+                    aspectRatio="video"
+                    objectFit="cover"
+                    priority={index === 0} // Prioritize first image
                   />
                 </Link>
 
@@ -116,9 +92,6 @@ const CaseStudies = () => {
                       </Link>
                       <p className="text-lg text-muted-foreground mb-4">
                         {study.subtitle}
-                      </p>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {study.description}
                       </p>
                     </div>
 
