@@ -1,35 +1,14 @@
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import ExperienceList from "./sections/ExperienceList";
 
 const ExperienceSection = () => {
-  const [experiences, setExperiences] = useState([]);
-
-  useEffect(() => {
-    // Load experience data
-    const loadExperiences = async () => {
-      // In a real implementation, you'd fetch from the JSON file
-      const experienceData = [
-        {
-          company: "Company One",
-          role: "Product Designer",
-          period: "2022-2024"
-        },
-        {
-          company: "Company Two",
-          role: "Product Designer",
-          period: "2020-2022"
-        },
-        {
-          company: "Company Three",
-          role: "UX Design Intern",
-          period: "2019"
-        }
-      ];
-      setExperiences(experienceData);
-    };
-
-    loadExperiences();
+  // Load experiences from JSON at build time
+  const experiences = useMemo(() => {
+    const modules = import.meta.glob('/src/content/experience.json', { eager: true });
+    const mod = modules['/src/content/experience.json'] as { default: any[] } | undefined;
+    if (!mod) return [];
+    return mod.default;
   }, []);
 
   return (

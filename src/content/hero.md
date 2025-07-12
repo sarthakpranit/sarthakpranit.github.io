@@ -1,6 +1,7 @@
 
-# Hi, I'm Your Name.
+# Hi, I'm Sarthak.
 
-Some people call me a creative developer. I've been crafting digital experiences for the last few years, combining design and code.
 
-I live in your city and love building things that matter. Keep up with me on [Instagram](#) or [Twitter](#).
+I've spent 8 years working at Booking.com designing personalization systems while documenting the absurdity. 
+
+I live in Amsterdam and love building things that are resilient. Keep up with me on [Linkedin](https://www.linkedin.com/in/spranit/) or [Twitter](https://x.com/liberosist).

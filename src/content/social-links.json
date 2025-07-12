@@ -1,8 +1,7 @@
 
 [
-  { "name": "Twitter", "url": "#" },
-  { "name": "Instagram", "url": "#" },
-  { "name": "LinkedIn", "url": "#" },
-  { "name": "Dribbble", "url": "#" },
-  { "name": "CV", "url": "#", "isCV": true }
+  { "name": "Twitter", "url": "https://x.com/liberosist" },
+  { "name": "Instagram", "url": "https://www.instagram.com/unpackedbackpack/" },
+  { "name": "LinkedIn", "url": "https://www.linkedin.com/in/spranit/" },
+  { "name": "CV", "url": "https://drive.google.com/file/d/1-08mdK0vR2164CBE1JRWaDgfp4Zk-JOn/view?usp=sharing", "isCV": true }
 ]

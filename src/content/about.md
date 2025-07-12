@@ -1,4 +1,6 @@
 
 # About
 
-I'm passionate about creating meaningful digital experiences that solve real problems. When I'm not designing, you can find me exploring new technologies, reading about design philosophy, or enjoying a good cup of coffee.
+Design Thinking can't solve every problem. Easy answers usually ignore second-order effects and are wrong. Big problems are messy and subjective, so the process should be too. 
+
+My strength lies in going beyond the standard design process - understanding underlying incentives, engineering and data perspectives, working with research for user insights, then delivering frameworks to discuss various approaches.

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Aeonik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,10 +94,42 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'Aeonik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'sans-serif';
     font-weight: 400;
     line-height: 1.6;
   }
+}
+
+/* Ensure markdown h1 (hero title) uses hero style */
+.prose h1 {
+  @apply text-4xl md:text-5xl font-normal text-foreground mb-12 leading-tight;
+}
+
+/* Animated underline for all links */
+a, .prose a {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a::after, .prose a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 1px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition-property: transform, left, right;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  border-radius: 0px;
+}
+a:hover::after, .prose a:hover::after {
+  transform: scaleX(1);
+}
+/* Remove default underline on hover */
+a:hover, .prose a:hover {
+  text-decoration: none;
 }
 
 @layer utilities {

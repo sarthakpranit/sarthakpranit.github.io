@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 
 interface SocialLink {
   name: string;
@@ -5,11 +6,15 @@ interface SocialLink {
   isCV?: boolean;
 }
 
-interface SocialLinksProps {
-  links: SocialLink[];
-}
+const SocialLinks = () => {
+  // Load social links from JSON at build time
+  const links = useMemo(() => {
+    const modules = import.meta.glob('/src/content/social-links.json', { eager: true });
+    const mod = modules['/src/content/social-links.json'] as { default: SocialLink[] } | undefined;
+    if (!mod) return [];
+    return mod.default;
+  }, []);
 
-const SocialLinks = ({ links }: SocialLinksProps) => {
   return (
     <div className="flex space-x-6">
       {links.map((link, index) => (

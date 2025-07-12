@@ -108,4 +108,13 @@ export function loadCaseStudyMetadata() {
     image: cs.frontmatter.image,
     link: `/case-study/${cs.frontmatter.id}`
   }));
+}
+
+// Generic markdown loader for single files
+export function loadMarkdownContent(path: string): string {
+  const modules = import.meta.glob('/src/content/*.md', { eager: true, query: '?raw', import: 'default' });
+  const mod = modules[path] as string | undefined;
+  if (!mod) throw new Error(`Markdown file not found: ${path}`);
+  // Remove frontmatter if present
+  return mod.replace(/^---[\s\S]*?---/, '').trim();
 } 
