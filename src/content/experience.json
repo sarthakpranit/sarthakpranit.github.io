@@ -1,18 +1,18 @@
 
 [
   {
-    "company": "Company One",
-    "role": "Product Designer",
-    "period": "2022-2024"
+    "company": "Booking.com",
+    "role": "Lead Product Designer",
+    "period": "2016-Today"
   },
   {
-    "company": "Company Two", 
-    "role": "Product Designer",
-    "period": "2020-2022"
+    "company": "CREO", 
+    "role": "Lead Product Designer",
+    "period": "2014-2016"
   },
   {
-    "company": "Company Three",
-    "role": "UX Design Intern",
-    "period": "2019"
+    "company": "Taxi4Sure",
+    "role": "Product Designer",
+    "period": "2013-2014"
   }
 ]

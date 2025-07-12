@@ -110,6 +110,7 @@ a, .prose a {
   position: relative;
   text-decoration: none;
   transition: color 0.2s;
+  font-weight: 600;
 }
 a::after, .prose a::after {
   content: '';
