@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CaseStudies = () => {
@@ -19,7 +19,7 @@ const CaseStudies = () => {
       roles: ["Product Design", "User Research", "Prototyping"],
       year: "2024",
       client: "CUJO AI",
-      link: "#",
+      link: "/case-study/1",
       image: "/placeholder.svg"
     },
     {
@@ -30,7 +30,7 @@ const CaseStudies = () => {
       roles: ["UX/UI Design", "Design System", "User Testing"],
       year: "2023",
       client: "MedTech Solutions",
-      link: "#",
+      link: "/case-study/2",
       image: "/placeholder.svg"
     },
     {
@@ -41,7 +41,7 @@ const CaseStudies = () => {
       roles: ["Product Strategy", "Visual Design", "Data Visualization"],
       year: "2023",
       client: "FinanceFlow",
-      link: "#",
+      link: "/case-study/3",
       image: "/placeholder.svg"
     }
   ];
@@ -75,22 +75,24 @@ const CaseStudies = () => {
             {caseStudies.map((study, index) => (
               <article key={study.id} className="group">
                 {/* Project Image */}
-                <div className="mb-8 overflow-hidden rounded-lg bg-muted">
+                <Link to={study.link} className="block mb-8 overflow-hidden rounded-lg bg-muted">
                   <img 
                     src={study.image} 
                     alt={study.title}
                     className="w-full h-64 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                </div>
+                </Link>
 
                 {/* Project Details */}
                 <div className="grid md:grid-cols-3 gap-12">
                   {/* Main Content */}
                   <div className="md:col-span-2 space-y-6">
                     <div>
-                      <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
-                        {study.title}
-                      </h2>
+                      <Link to={study.link}>
+                        <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
+                          {study.title}
+                        </h2>
+                      </Link>
                       <p className="text-lg text-muted-foreground mb-4">
                         {study.subtitle}
                       </p>
@@ -99,13 +101,13 @@ const CaseStudies = () => {
                       </p>
                     </div>
 
-                    <a 
-                      href={study.link}
+                    <Link 
+                      to={study.link}
                       className="inline-flex items-center text-foreground hover:text-primary transition-colors group/link"
                     >
                       View Case Study
-                      <ExternalLink className="h-4 w-4 ml-2 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-                    </a>
+                      <ArrowLeft className="h-4 w-4 ml-2 rotate-180 transition-transform group-hover/link:translate-x-1" />
+                    </Link>
                   </div>
 
                   {/* Meta Information */}

@@ -5,22 +5,22 @@ import { Link } from "react-router-dom";
 const CaseStudiesSection = () => {
   const caseStudies = [
     {
-      title: "E-commerce Platform Redesign",
-      subtitle: "Redesigning the shopping experience for a major retailer",
+      title: "CUJO Smart Firewall",
+      subtitle: "Redesigning home network security for the modern family",
       roles: "Product Design, User Research",
-      link: "/case-studies"
+      link: "/case-study/1"
     },
     {
-      title: "Healthcare App Interface",
-      subtitle: "Streamlining patient care through digital solutions",
-      roles: "UX/UI Design, Prototyping",
-      link: "/case-studies"
+      title: "Healthcare Platform",
+      subtitle: "Streamlining patient care through digital innovation",
+      roles: "UX/UI Design, Design System",
+      link: "/case-study/2"
     },
     {
       title: "Fintech Dashboard",
       subtitle: "Creating intuitive financial management tools",
       roles: "Product Strategy, Visual Design",
-      link: "/case-studies"
+      link: "/case-study/3"
     }
   ];
 
