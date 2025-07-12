@@ -26,6 +26,10 @@ const Index = () => {
           <CaseStudiesSection />
           <div className="my-10 border-t border-border" />
           <AboutSection />
+          <div className="my-10 border-t border-border" />
+          <footer className="text-center text-muted-foreground" style={{ fontSize: '12px' }}>
+            Made with anxiety, a fear of forgetting things, and me telling Claude "Nah, could be neater".
+          </footer>
         </div>
       </div>
     </div>
