@@ -4,7 +4,8 @@ const AboutSection = () => {
     { name: "Twitter", url: "#" },
     { name: "Instagram", url: "#" },
     { name: "LinkedIn", url: "#" },
-    { name: "Dribbble", url: "#" }
+    { name: "Dribbble", url: "#" },
+    { name: "CV", url: "#", isCV: true }
   ];
 
   return (
@@ -25,7 +26,10 @@ const AboutSection = () => {
             <a 
               key={index}
               href={link.url} 
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-muted-foreground hover:text-foreground transition-colors ${
+                link.isCV ? 'font-medium' : ''
+              }`}
+              {...(link.isCV && { target: '_blank', rel: 'noopener noreferrer' })}
             >
               {link.name}
             </a>
