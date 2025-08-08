@@ -46,7 +46,7 @@ const fallbackCaseStudies: CaseStudy[] = [
   {
     frontmatter: {
       id: 2,
-      title: "Designing the Personal Plumbing",
+      title: "The Architecture of Anticipation",
       subtitle: "The invisible framework that powers personalization across 100+ teams",
       roles: ["UX Architecture", "Personalization Frameworks", "System Design"],
       year: "2024 - Today", 
