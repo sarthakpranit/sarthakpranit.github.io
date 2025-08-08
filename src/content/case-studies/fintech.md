@@ -1,11 +1,11 @@
 
 ---
 id: 3
-title: "Fintech Dashboard"
-subtitle: "Creating intuitive financial management tools"
-roles: ["Product Strategy", "Visual Design", "Data Visualization"]
-year: "2023"
-client: "FinanceFlow"
+title: "When Everyone Wants the Front Page"
+subtitle: "How we balanced 9M daily users against 54 teams' competing business goals"
+roles: ["Lead UX Strategy", "Cross-functional Leadership", "Stakeholder Management"]
+year: "2022"
+client: "Booking.com"
 image: "/placeholder.svg"
 heroImage: "/placeholder.svg"
 ---

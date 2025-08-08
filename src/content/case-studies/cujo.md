@@ -1,11 +1,11 @@
 
 ---
 id: 1
-title: "CUJO Smart Firewall"
-subtitle: "Redesigning home network security for the modern family"
-roles: ["Product Design", "User Research", "Prototyping"]
-year: "2024"
-client: "CUJO AI"
+title: "The €200M Algorithm"
+subtitle: "Why your vacation suggestions got 400% better overnight?"
+roles: ["Product Strategy", "AI/ML Design", "Cross-functional Leadership"]
+year: "2023"
+client: "Booking.com"
 image: "/placeholder.svg"
 heroImage: "/placeholder.svg"
 ---

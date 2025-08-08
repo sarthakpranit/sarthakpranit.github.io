@@ -1,11 +1,11 @@
 
 ---
 id: 2
-title: "Healthcare Platform"
-subtitle: "Streamlining patient care through digital innovation"
-roles: ["UX/UI Design", "Design System", "User Testing"]
-year: "2023" 
-client: "MedTech Solutions"
+title: "The Architecture of Anticipation"
+subtitle: "The invisible framework that powers personalization across 100+ teams"
+roles: ["UX Architecture", "Personalization Frameworks", "System Design"]
+year: "2024 - Today" 
+client: "Booking.com"
 image: "/placeholder.svg"
 heroImage: "/placeholder.svg"
 ---
