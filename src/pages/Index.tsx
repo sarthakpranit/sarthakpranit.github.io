@@ -28,7 +28,7 @@ const Index = () => {
           <AboutSection />
           <div className="my-10 border-t border-border" />
           <footer className="text-center text-muted-foreground" style={{ fontSize: '12px' }}>
-            Made with anxiety, a fear of forgetting things, and me telling Claude "Nah, could be neater".
+            This portfolio was made with anxiety with a hint of a fear of forgetting things.
           </footer>
         </div>
       </div>
