@@ -7,7 +7,6 @@ import { AppProviders } from "@/providers/app-providers";
 
 // Lazy load components
 const Index = lazy(() => import("./pages/Index"));
-const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const TestContent = lazy(() => import("./pages/TestContent"));
@@ -28,7 +27,6 @@ const App = () => (
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/case-study/:id" element={<CaseStudyDetail />} />
             <Route path="/test-content" element={<TestContent />} />
             <Route path="*" element={<NotFound />} />

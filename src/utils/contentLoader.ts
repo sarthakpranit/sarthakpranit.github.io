@@ -27,20 +27,20 @@ const fallbackCaseStudies: CaseStudy[] = [
   {
     frontmatter: {
       id: 1,
-      title: "The €200M Algorithm",
-      subtitle: "Why your vacation suggestions got 400% better overnight",
-      roles: ["Product Strategy", "AI/ML Design", "Cross-functional Leadership"],
-      year: "2023",
+      title: "Traveller Intent Framework",
+      subtitle: "Teaching AI systems to understand what travelers actually want, across hotels, flights, restaurants, and everything in between",
+      roles: ["Lead Designer, Marketplace"],
+      year: "2024",
       client: "Booking.com",
       image: "/placeholder.svg",
       heroImage: "/placeholder.svg"
     },
-    content: "",
+    content: "traveller-intent-framework", // Reference to MDX file
     sections: {
-      introduction: "CUJO provides the power of enterprise security solutions for simple and elegant devices. I helped CUJO shape their brand and user experience.",
-      problem: "The challenge was to simplify complex network security concepts for everyday users, making it accessible and manageable through an intuitive interface.",
-      solution: "We designed a user-friendly mobile app and web dashboard that provides real-time threat detection, parental controls, and device management, all while maintaining a seamless user experience.",
-      conclusion: "The CUJO project demonstrated the power of user-centric design in transforming complex technology into an accessible and valuable tool for everyday users. By focusing on simplicity and ease of use, we helped CUJO establish itself as a leader in home network security."
+      introduction: "Creating a shared language for understanding traveler intent across 94 teams at Booking.com, with €200M+ revenue impact.",
+      problem: "Different teams at Booking.com built isolated systems to understand traveler intent, making it impossible to deliver a connected trip experience.",
+      solution: "Designed a unified Intent Framework based on three models: Choices (fundamental decisions), Actions (progression stages), and Needs (explicit and implicit signals).",
+      conclusion: "The framework became core to Booking.com's Connected Trip strategy, giving teams a shared language that made coordination faster and enabled new AI-powered experiences."
     }
   },
   {
@@ -98,16 +98,19 @@ export function loadCaseStudyById(id: number): CaseStudy | null {
 // Load case study metadata for listing
 export function loadCaseStudyMetadata() {
   const caseStudies = loadAllCaseStudies();
-  return caseStudies.map(cs => ({
-    id: cs.frontmatter.id,
-    title: cs.frontmatter.title,
-    subtitle: cs.frontmatter.subtitle,
-    roles: cs.frontmatter.roles,
-    year: cs.frontmatter.year,
-    client: cs.frontmatter.client,
-    image: cs.frontmatter.image,
-    link: `/case-study/${cs.frontmatter.id}`
-  }));
+  // Only show case study #1 on home page
+  return caseStudies
+    .filter(cs => cs.frontmatter.id === 1)
+    .map(cs => ({
+      id: cs.frontmatter.id,
+      title: cs.frontmatter.title,
+      subtitle: cs.frontmatter.subtitle,
+      roles: cs.frontmatter.roles,
+      year: cs.frontmatter.year,
+      client: cs.frontmatter.client,
+      image: cs.frontmatter.image,
+      link: `/case-study/${cs.frontmatter.id}`
+    }));
 }
 
 // Generic markdown loader for single files

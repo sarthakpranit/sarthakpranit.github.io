@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveller Intent Framework - Sarthak Pranit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        /* Layout Structure */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 120px 0 80px;
+            margin-bottom: 80px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .hero .meta {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            opacity: 0.8;
+        }
+
+        .hero .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero .meta-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .hero .meta-value {
+            font-size: 1.125rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 120px;
+        }
+
+        .section-header {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 800px;
+        }
+
+        /* Content Blocks */
+        .content-block {
+            margin-bottom: 48px;
+        }
+
+        .content-block h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .content-block p {
+            font-size: 1.125rem;
+            color: #475569;
+            margin-bottom: 16px;
+            max-width: 800px;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 32px;
+            margin: 48px 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .highlight-box p {
+            font-size: 1.125rem;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        /* Framework Grid */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .framework-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .framework-card h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .framework-card p {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Impact Grid */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .impact-stat {
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .impact-stat .number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .impact-stat .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Placeholder for images */
+        .image-placeholder {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 48px;
+            text-align: center;
+            margin: 48px 0;
+            color: #64748b;
+        }
+
+        .image-placeholder p {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .framework-grid,
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>Traveller Intent Framework</h1>
+            <p class="subtitle">Teaching AI systems to understand what travelers actually want, across hotels, flights, restaurants, and everything in between</p>
+            
+            <div class="meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Lead Designer, Marketplace</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">6 months, 2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Impact</span>
+                    <span class="meta-value">94 teams, €200M+ revenue</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Company</span>
+                    <span class="meta-value">Booking.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2 class="section-title">The Problem</h2>
+            <p class="section-subtitle">Why we couldn't just build another recommendation engine</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Everyone was solving the same problem in different ways</h3>
+            <p>Here's what was happening at Booking.com: the hotels team built their own system to understand what travelers wanted. Then the flights team built theirs. Then attractions. Then restaurants. Each team created something that worked great for their specific domain, but these systems couldn't talk to each other.</p>
+            
+            <p>This meant a traveler could search for family-friendly hotels in Barcelona, but when we showed them restaurant recommendations, we'd start from scratch. No memory of the "family-friendly" signal. Same thing with accessibility needs—someone books a hotel room with wheelchair access, but our activity suggestions don't reflect that at all. Every product made travelers explain themselves all over again.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>What this actually cost us</h4>
+            <p>We had really sophisticated machine learning models running all over the place. But a traveler's dining choices had nothing to do with their activity preferences in our systems, even though they were obviously related in real life. We couldn't give people the connected trip experience they expected because our AI literally couldn't see the connections.</p>
+            <p>Even worse, we were only making predictions based on tiny slices of what we knew about travelers. Each system could only use its own narrow data, which meant every prediction was missing crucial context.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Why the obvious fixes didn't work</h3>
+            <p>Teams had tried to solve this before by building shared databases and unified customer profiles. Those helped, but they didn't fix the core issue: nobody agreed on what "intent" actually meant. So even when teams could access the same data, they interpreted it in completely different ways.</p>
+            
+            <p>Also, most personalization systems put people into fixed buckets—"business traveler" or "family vacationer" or "budget-conscious." But that's not how people actually travel. The same person booking a romantic anniversary trip has totally different needs than when they're booking a work conference. These static categories couldn't capture how fluid and contextual travel planning really is.</p>
+        </div>
+    </section>
+
+    <!-- Image Placeholder -->
+    <div class="container">
+        <div class="image-placeholder">
+            <p><strong>[Figure 1: Multi-vertical journey fragmentation]</strong><br>Visual showing how traveler intent was being captured and acted upon in silos across different product verticals</p>
+        </div>
+    </div>
+
+    <!-- Approach Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2 class="section-title">The Framework</h2>
+            <p class="section-subtitle">Creating a shared language for how we talk about traveler intent</p>
+        </div>
+
+        <div class="content-block">
+            <h3>How I approached it</h3>
+            <p>Instead of jumping straight into technical specs or API designs, I started by mapping out how travelers actually think about planning trips. I looked at existing research and analyzed how people behaved across different parts of the site, and I noticed a pattern: every traveler's intent operates on three connected levels.</p>
+            
+            <p>There are fundamental Choices travelers need to make (where should I stay? what should I do?). There are Actions they take to work through those choices (exploring options, comparing prices, making decisions). And underneath everything are the Needs—both explicit things they tell us and implicit things we can infer from their behavior—that drive both the choices and actions.</p>
+
+            <p>This became the Intent Framework. It's not a database schema or a technical specification—it's a shared way of thinking that any team could use to understand what traveler signals mean and how to respond to them.</p>
+        </div>
+
+        <div class="framework-grid">
+            <div class="framework-card">
+                <h4>Choice Model</h4>
+                <p>The eight fundamental decisions every traveler faces: where to go, when to travel, where to stay, how to get there, what to do, where to eat, how to move around, and what to bring. These choices give us a structure for understanding intent across all our different products.</p>
+            </div>
+
+            <div class="framework-card">
+                <h4>Action Model</h4>
+                <p>The five stages of how intent evolves: to start (just beginning to explore), to find (actively searching), to choose (comparing options), to decide (ready to commit), to enhance (optimizing after booking). Each stage needs different kinds of help and suggests different next steps.</p>
+            </div>
+
+            <div class="framework-card">
+                <h4>Needs Model</h4>
+                <p>The explicit needs travelers tell us about (dietary restrictions, accessibility requirements) and the implicit ones we can infer (budget sensitivity, preference for quiet neighborhoods). These needs inform every choice and drive every action, and they evolve throughout the journey.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Why this is different from traditional personalization</h4>
+            <p>Most recommendation systems treat each user action as a separate event to optimize. Click on this hotel, get similar hotels. Book a flight, get flight-related suggestions. But this framework treats actions as connected signals within a larger story. When someone books an accessible hotel room, that's not just a feature preference—it's information that should influence every other recommendation we make for their entire trip.</p>
+            <p>The framework also lets us handle complexity better. We can understand that someone might be in the "comparing restaurants" stage while simultaneously still "exploring activities." Instead of treating the traveler as being in one single state, we can support multiple parallel streams of intent at different stages of completion.</p>
+        </div>
+    </section>
+
+    <!-- Image Placeholder -->
+    <div class="container">
+        <div class="image-placeholder">
+            <p><strong>[Figure 2: Visual primitives explaining Choice, Action, and Needs]</strong><br>Diagram showing how these three models interconnect and inform each other</p>
+        </div>
+    </div>
+
+    <!-- Implementation Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2 class="section-title">Making It Real</h2>
+            <p class="section-subtitle">How a framework becomes a working system</p>
+        </div>
+
+        <div class="content-block">
+            <h3>The coordination problem</h3>
+            <p>Once we had the framework, I started exploring what it would actually take to deliver a coordinated trip planning experience. Even though we were working with traditional backend services, not AI agents, the coordination challenge was real and complex.</p>
+            
+            <p>Think about what needs to happen when someone plans a Barcelona trip. One service tracks their total budget and flags when suggestions across hotels, restaurants, and activities start adding up to more than they said they wanted to spend. Another service monitors real-time availability and pricing changes—that hotel might be available now but could sell out tomorrow. A third service needs to check that the sequence of activities makes logical sense—are we suggesting a restaurant that's a two-hour drive from their hotel? Meanwhile, quality systems are evaluating review scores and flagging when a highly-rated restaurant has recent complaints about accessibility issues.</p>
+            
+            <p>I designed a trip planning flow to explore how the Intent Framework could help coordinate these services. The key insight was to stop pretending we had all the information we needed. Instead, the system would identify critical gaps and ask travelers for clarification exactly when those decisions actually mattered—not all at once upfront, and not by guessing.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>What this taught me about designing for agents</h3>
+            <p>Working on this service coordination problem taught me something important about what designing for actual AI agents might be like. Even though our implementation used traditional backend services, the fundamental design challenge was the same one that multi-agent AI systems face: how do you coordinate multiple independent systems that each have partial information and need to make decisions together?</p>
+            
+            <p>The breakthrough for me was recognizing that uncertainty isn't something to hide from users. When the budget tracking service detected that someone's restaurant preferences didn't match their stated budget, we could have quietly downgraded recommendations or made assumptions about which mattered more. Instead, we surfaced it: would you rather splurge on a few special meals, or try more local spots to stay within budget? This keeps the decision-making transparent and gives travelers control over trade-offs that actually matter to them.</p>
+
+            <p>This same pattern would apply to agent-based systems, but with even more complexity. Agents don't just execute predefined logic—they make inferences, develop strategies, and need to explain their reasoning to each other and to users. The trip planning flow became my way of thinking through how to design for that kind of coordination, even though the actual implementation was more straightforward.</p>
+        </div>
+    </section>
+
+    <!-- Image Placeholder -->
+    <div class="container">
+        <div class="image-placeholder">
+            <p><strong>[Figure 3: Needs landscape diagram]</strong><br>Shows how needs inform choices and incentivize actions across the connected trip experience</p>
+        </div>
+        
+        <div class="image-placeholder">
+            <p><strong>[Multi-Agent Trip Planning Flow]</strong><br>Interactive demonstration of how seven different agent types collaborate, handle uncertainty, and clarify ambiguity throughout a booking journey</p>
+        </div>
+    </div>
+
+    <!-- Cross-Functional Work Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2 class="section-title">Getting Everyone Aligned</h2>
+            <p class="section-subtitle">How to get very different teams to agree on anything</p>
+        </div>
+
+        <div class="content-block">
+            <h3>The coordination challenge</h3>
+            <p>Getting Data, ML, Architecture, Platform, and Product teams to agree on a framework that spans all their domains takes more than good documentation. Each team was already solving real problems in their own way, and any framework that ignored their existing constraints was doomed to fail.</p>
+            
+            <p>I designed a two-phase workshop process. First, I met with each function separately to understand their specific challenges and constraints. Then I brought everyone together for an integrated workshop where we could identify dependencies and surface conflicts early. This gave teams space to question the framework's assumptions before anyone committed resources to building it.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Handling the "is this even worth building?" question</h3>
+            <p>Technical leaders raised a valid concern: if this framework doesn't align with our broader platform architecture, we could build something that ends up getting thrown away when we eventually do the "proper" integration with systems like User Context, Session Service, and our Customer Data Platform.</p>
+            
+            <p>Instead of getting defensive, I reframed what the framework actually was. First and foremost, it's a thinking tool—a shared vocabulary that would help us make better architectural decisions regardless of which specific implementation path we chose. This changed the conversation from "should we build this?" to "does this help us think more clearly about problems we're already solving?"</p>
+
+            <p>That reframing made the framework adoptable even when the technical landscape was still ambiguous. Teams could use it to structure their thinking immediately, and the specific technical implementation could evolve as the platform matured.</p>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="container">
+        <div class="section-header">
+            <h2 class="section-title">What Changed</h2>
+            <p class="section-subtitle">The impact and what I learned about designing AI systems</p>
+        </div>
+
+        <div class="impact-grid">
+            <div class="impact-stat">
+                <div class="number">94</div>
+                <div class="label">Teams Using Framework</div>
+            </div>
+            <div class="impact-stat">
+                <div class="number">€200M+</div>
+                <div class="label">Revenue Impact</div>
+            </div>
+            <div class="impact-stat">
+                <div>
+                    <div class="number">3</div>
+                    <div class="label">Hero Use Case Pilots</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h3>How the organization changed</h3>
+            <p>The framework became a core part of Booking.com's Connected Trip strategy and our broader AI vision for the Marketplace. But honestly, the more valuable impact was giving teams a shared language. Before this, coordinating personalization work across teams required tons of meetings and alignment conversations. Now teams could talk about "choice completion" and "action progression" and everyone knew what those meant and how to measure them.</p>
+            
+            <p>This kind of conceptual alignment turned out to be more valuable than any specific technical implementation. It made everything else move faster.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>What I learned about AI design</h3>
+            <p>This project completely changed how I think about designing for AI systems. The biggest realization: when you're designing AI products, you're not really designing interfaces—you're designing at the system architecture level. The decisions that actually affect user experience happen in how different AI systems coordinate, what information they share, and how they handle uncertainty. Those are all "backend" concerns that traditional UX methods don't really address.</p>
+            
+            <p>I learned that designing for AI means designing decision-making frameworks, not screens. The trip planning flow isn't really about UI—it's about modeling how multiple AI systems with incomplete information work together to help people make complex decisions. The UI is just where that coordination becomes visible to users.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>The hardest part: letting go of old assumptions</h4>
+            <p>The toughest thing about this work was unlearning traditional product design thinking. At first, I kept trying to apply familiar patterns—user flows, information architecture, standard interaction patterns. But AI systems don't work like traditional products. They don't have fixed states. They don't follow predictable paths.</p>
+            
+            <p>The breakthrough for me came when I stopped treating uncertainty and incomplete context as problems to solve, and instead started treating them as fundamental properties to design around. This meant developing completely new design building blocks: intent graphs, coordination patterns between different agents, strategies for when to clarify vs. when to infer, and ways to represent how confident the system is about different things.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>What this means for agent-based design</h3>
+            <p>Looking back, this framework was an early exploration of what I now think of as Agent Experience Design. The real interface isn't the conversation or the visual UI—it's the structured data flowing between different agents, the rules that govern how they coordinate, and the patterns for handling uncertainty that keep everything working together coherently.</p>
+            
+            <p>As AI systems move toward having multiple specialized agents working together, the designer's role is shifting from crafting screens to architecting decision systems. The Intent Framework shows how design thinking can create structure and clarity in these complex coordination challenges.</p>
+        </div>
+    </section>
+
+    <!-- Next Steps Section -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div class="section-header">
+            <h2 class="section-title">What's Next</h2>
+            <p class="section-subtitle">Where this work is heading</p>
+        </div>
+
+        <div class="content-block">
+            <p>The framework set up the conceptual foundation, and now we're testing it with focused pilots in recommendations, storefront design, and trip planning. The next phase involves deeper research into how travelers actually move through the different action stages—what makes someone shift from "exploring" to "actively comparing," and what triggers the decision to book.</p>
+            
+            <p>More broadly, this work has shown me that we need new design methods and tools specifically for agent coordination. I'm currently exploring how designers can prototype and test multi-agent systems without having to write production code, and how we can make agent decision-making more transparent so it's easier to understand and debug when things go wrong.</p>
+        </div>
+    </section>
+
+</body>
+</html>
