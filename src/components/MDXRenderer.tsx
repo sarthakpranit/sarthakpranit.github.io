@@ -87,8 +87,8 @@ export const MDXRenderer = ({ mdxFileName }: MDXRendererProps) => {
             ),
             // Strong/Bold - for subtitles and emphasis, increased by 2 points
             strong: ({ children, ...props }) => (
-              <strong className="text-2xl text-foreground font-normal block mb-8" {...props}>
-                {children}
+              <strong className="text-2xl text-muted-foreground font-normal italic block mb-4" {...props}>
+                <span className="not-italic">a.k.a </span>{children}
               </strong>
             ),
             // Section dividers

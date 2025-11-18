@@ -95,7 +95,7 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'sans-serif';
-    font-size: 18px;
+    font-size: 1.25em;
     font-weight: 300;
     line-height: 1.8;
   }
